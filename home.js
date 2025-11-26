@@ -11,19 +11,27 @@ let currentLang = "en";
 
 // حدث عند الضغط على زر اللغة
 langToggle.addEventListener("click", () => {
+
     // تبديل النصوص بين الإنجليزية والعربية
     translatableElements.forEach(el => {
-        // إذا العنصر فيه نصوص داخل span، نخلي span يتغير فقط
-        if(el.querySelector(".text-content")) {
+        // إذا العنصر فيه نصوص داخل span
+        if (el.querySelector(".text-content")) {
             const textSpan = el.querySelector(".text-content");
-            textSpan.textContent = currentLang === "en" ? el.getAttribute("data-ar") : el.getAttribute("data-en");
+            textSpan.textContent = currentLang === "en"
+                ? el.getAttribute("data-ar")
+                : el.getAttribute("data-en");
         } else {
-            el.textContent = currentLang === "en" ? el.getAttribute("data-ar") : el.getAttribute("data-en");
+            el.textContent = currentLang === "en"
+                ? el.getAttribute("data-ar")
+                : el.getAttribute("data-en");
         }
     });
 
+    // 🔥 تغيير اتجاه الصفحة بالكامل
+    document.documentElement.dir = currentLang === "en" ? "rtl" : "ltr";
+
     // تحديث الزر نفسه
-    if(currentLang === "en") {
+    if (currentLang === "en") {
         langToggle.innerHTML = "AR <span>▾</span>";
         currentLang = "ar";
     } else {
@@ -31,4 +39,3 @@ langToggle.addEventListener("click", () => {
         currentLang = "en";
     }
 });
-
